@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Soy pinguin.dark, una página de memes intentando ser vtuber, youtuber y ser feliz. Contenido de memes, repost, cringe y más.">
+    <meta name="keywords"
+        content="pinguin.dark, memes, vtuber, youtuber, cringe, repost, contenido divertido, entretenimiento, streamer, comediante digital">
+    <meta name="author" content="Pinguin.dark">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&family=DotGothic16&display=swap"
+        rel="stylesheet">
+    <title>Pinguin.dark - Memes y Vtuber</title>
+    <style>
+        /* Reset de márgenes y padding para todos los elementos */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            margin: 0 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active {
+            background: #A06CD5; /* Un morado más vibrante del fondo */
+            font-weight: bold;
+        }
+
+        /*Animaciones*/
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes brillo {
+            0% {
+                filter: brightness(1);
+            }
+
+            50% {
+                filter: brightness(1.5);
+            }
+
+            100% {
+                filter: brightness(1);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.03);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        :root {
+            --color-primario: #F0E6F6; /* Un blanco violáceo suave, brillante para títulos */
+            --color-secundario: #D4BDED; /* Un morado claro para texto general, legible */
+            --fondo-transparente: rgba(45, 12, 87, 0.7); /* Un morado oscuro semi-transparente */
+            --sombra: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+            --borde: 2px solid #8A4FBC; /* Un morado medio para los bordes */
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            /* Overlay oscuro */
+            z-index: -1;
+        }
+
+        /* Estilos generales del body */
+        body {
+            background-image: url("https://i.imgur.com/YOzuJpD.png"); /* Fondo actualizado */
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            font-family: "Darumadrop One", serif;
+            font-weight: 400;
+            font-style: normal;
+            min-height: 100vh;
+            line-height: 1.6;
+            animation: fadeIn 0.5s ease-in-out;
+            z-index: 1;
+            position: relative;
+            padding-bottom: 50px;
+            /* Espaciado al final de la página */
+        }
+
+        .header-container {
+            display: flex;
+            position: relative;
+            width: 100%;
+            align-items: flex-start;
+            justify-content: center;
+            /* Espacio entre los elementos */
+            max-width: 1100px;
+            padding-top: 20px;
+            margin: auto;
+        }
+
+        /* Ajustes para la imagen central del encabezado */
+        .welcome-center {
+            max-height: 180px; /* Tamaño principal para el personaje */
+            width: auto; /* Ancho se ajusta para mantener la proporción */
+            z-index: 1;
+            margin: 0 20px;
+            filter: drop-shadow(0 0 10px #D4BDED)
+            drop-shadow(0 0 30px #A06CD5);
+        }
+
+        /* Las reglas para .left-lantern y .right-lantern han sido eliminadas */
+
+        /* Títulos principales */
+        h1,
+        h2 {
+            font-weight: 400;
+            font-style: normal;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--color-primario);
+        }
+
+        p {
+            color: var(--color-secundario);
+            font-size: 1em;
+        }
+
+        .button-53 {
+            background-color: #6C4675; /* Morado más oscuro, del fondo */
+            border: 0 solid #E5E7EB;
+            box-sizing: border-box;
+            color: #ffffff;
+            display: flex;
+            font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-size: 1rem;
+            font-weight: 700;
+            justify-content: center;
+            line-height: 1.75rem;
+            padding: .75rem 1.65rem;
+            position: relative;
+            text-align: center;
+            text-decoration: none #000000 solid;
+            text-decoration-thickness: auto;
+            width: 100%;
+            max-width: 460px;
+            position: relative;
+            cursor: pointer;
+            transform: rotate(-2deg);
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        .button-53:focus {
+            outline: var(--borde);
+        }
+
+        .button-53:after {
+            content: '';
+            position: absolute;
+            border: 1px solid #000000;
+            bottom: 4px;
+            left: 4px;
+            width: calc(100% - 1px);
+            height: calc(100% - 1px);
+        }
+
+        .button-53:hover {
+            filter: brightness(1.2);
+            transform: rotate(0deg) scale(1.03);
+        }
+
+        .button-53:hover:after {
+            bottom: 2px;
+            left: 2px;
+        }
+
+
+        /* Estilo de la navegación */
+        #navigator {
+            background: var(--fondo-transparente);
+            /* Fondo oscuro con opacidad */
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            width: 100%;
+            min-height: 200px;
+            display: flex;
+            overflow: hidden;
+            flex-direction: column;
+            /* Ajustar el ancho del menú */
+            max-width: 200px;
+            overflow-y: auto;
+            outline: var(--borde)
+        }
+
+        #navigator h2 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: var(--color-primario);
+        }
+
+        #navigator ul {
+            list-style-type: none;
+        }
+
+        #navigator ul li {
+            margin-bottom: 10px;
+        }
+
+        #navigator ul li a { /* Estilo para los enlaces de navegación */
+            text-decoration: none;
+            color: var(--color-secundario);
+            font-weight: bold;
+            font-size: 1rem;
+            transition: color 0.3s ease, background-color 0.3s ease;
+            padding: 5px 10px; /* Añadido padding para mejor área de clic */
+            border-radius: 5px;
+            display: block; /* Para que el padding funcione en toda el área */
+        }
+
+        #navigator ul li a:hover {
+            color: #A06CD5; /* Morado vibrante */
+            background-color: rgba(255, 255, 255, 0.1); /* Fondo sutil al pasar el mouse */
+        }
+
+        #navigator ul li a.active-nav { /* Estilo para el enlace de navegación activo */
+            background-color: var(--borde); /* Color de borde para el activo */
+            color: var(--color-primario);
+            text-decoration: none;
+        }
+
+
+        /* Estilos para el contenedor principal */
+        #container {
+            width: 100%;
+            max-width: 900px;
+            /* Más ancho en pantallas grandes */
+            min-width: 10%;
+            /* Se ajusta en móviles */
+            margin: 20px auto;
+            /* Centrar */
+            min-height: calc(100vh - 150px);
+            /* Altura mínima para que el contenido ocupe casi toda la pantalla */
+            display: flex;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            /* Permite que los elementos se adapten a la siguiente línea */
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: clamp(5px, 2vw, 20px);
+            /* Espaciado dinámico */
+        }
+
+        #container>* {
+            flex: 1 1 calc(33% - 15px);
+            /* Asegura que los elementos ocupen 1/3 del ancho, con un espaciado de 15px */
+            box-sizing: border-box;
+        }
+
+        /* Contenido principal - Sección individual */
+        .content-section {
+            background: var(--fondo-transparente);
+            border-radius: 12px;
+            box-shadow: var(--sombra);
+            padding: clamp(10px, 1vw, 25px);
+            color: var(--color-primario);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            outline: var(--borde);
+            margin-bottom: 20px; /* Espaciado entre secciones */
+            flex: 2; /* Para que ocupe el espacio principal */
+        }
+
+        /* Ocultar secciones de contenido que no están activas */
+        .tab-content {
+            display: none; /* Por defecto, todas las secciones de contenido de pestañas están ocultas */
+        }
+
+        .tab-content.active-content {
+            display: block; /* Mostrar solo la sección de contenido activa */
+        }
+
+
+        .video-responsive-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio (divide height by width, 9/16 = 0.5625) */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            margin-top: 20px; /* Espacio encima del video */
+            border-radius: 8px; /* Bordes redondeados para el contenedor del video */
+        }
+
+        .video-responsive-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+
+        /* Estilo para los posts */
+        #posts-image {
+            width: 100px;
+            /* Ancho fijo */
+            max-width: 100%;
+            /* Evita que la imagen sobresalga */
+            height: auto;
+            /* Mantiene la relación original */
+            object-fit: cover;
+            /* Recorta la imagen para ajustarla bien sin distorsión */
+            border-radius: 5px;
+            display: block;
+            /* Para asegurar centrado */
+            margin: 15px auto;
+            /* Centra la imagen */
+            box-shadow: var(--sombra);
+            /* Pequeña sombra para resaltar */
+        }
+
+        /* Barra lateral */
+        #sidebar {
+            background: var(--fondo-transparente);
+            /* Fondo oscuro con opacidad */
+            border-radius: 12px;
+            box-shadow: var(--sombra);
+            overflow: hidden;
+            flex: 1;
+            /* Hace que la sidebar sea más pequeña */
+            width: 100%;
+            max-width: 250px;
+            min-width: 200px;
+            padding: 10px;
+            outline: var(--borde);
+        }
+
+        /* Estilos para el contacto */
+
+        #contact { /* Cambiado de .contact-list a #contact para el grid de botones de redes sociales */
+            display: grid;
+            /* Usa CSS Grid para organizar en columnas */
+            grid-template-columns: repeat(1, 1fr); /* Una columna para que cada botón ocupe el 100% del ancho */
+            gap: 10px; /* Espaciado entre elementos */
+        }
+
+        .boton {
+            display: flex;
+            margin-bottom: 0px; /* Eliminado el margen inferior, ahora lo controla el gap del grid */
+            align-items: center;
+            width: 100%;
+            /* Permite que se ajuste dentro de la grid */
+            padding: 10px 15px;
+            background-color: #E6E0F1; /* Un blanco violáceo muy claro para los botones */
+            border-radius: 50px;
+            text-decoration: none;
+            color: #4A235A; /* Un morado oscuro para el texto del botón */
+            font-size: 15px;
+            font-weight: bold;
+            position: relative;
+            box-shadow: var(--sombra);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .boton:hover {
+            transform: scale(1.05);
+        }
+
+        .boton img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #D4BDED; /* Color más claro para el texto del footer */
+        }
+
+        footer a {
+            color: #FF70A6; /* Un rosa vibrante para los enlaces del footer */
+            text-decoration: none;
+        }
+
+        .dev-credit {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.8rem;
+        }
+
+        /* ---------------------------------------------------- */
+        /* Media Queries para Responsive Design                 */
+        /* ---------------------------------------------------- */
+
+        /* Pantallas pequeñas (móviles - hasta 600px de ancho) */
+        @media (max-width: 600px) {
+            .header_text {
+                font-size: 2rem;
+            }
+
+            .header-right {
+                display: none;
+            }
+
+            .header-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            /* Ocultar los GIFs laterales en móviles para evitar solapamiento */
+            .left-lantern,
+            .right-lantern {
+                display: none;
+            }
+
+            .welcome-center {
+                max-height: 120px; /* Reduce el tamaño del personaje en móviles */
+                max-width: 80%; /* Permite que el personaje central se encoja más */
+                width: 80vw;
+            }
+
+            .button-53 {
+                font-size: 0.9rem;
+                padding: 0.5rem 1rem;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            #navigator {
+                max-width: 100%;
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+
+            /* Asegurar que la barra lateral puede encogerse completamente */
+            #sidebar {
+                max-width: 100%;
+                min-width: auto; /* Permite que la barra lateral se adapte al contenido */
+            }
+
+            #posts-image {
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+            }
+
+            footer {
+                padding: 10px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Pantallas medianas (tablets - hasta 768px de ancho) */
+        @media (max-width: 768px) {
+            .header_text {
+                font-size: 2.5rem;
+            }
+
+            .button-53 {
+                font-size: 1rem;
+            }
+
+            /* Ajustes para los GIFs y el personaje central en tablets */
+            .welcome-center {
+                max-height: 150px; /* Tamaño del personaje en tablets */
+            }
+            .left-lantern,
+            .right-lantern {
+                max-height: 130px; /* Tamaño de los GIFs en tablets */
+                max-width: 150px; /* Limitar el ancho también en tablets */
+                left: 0; /* Pegado al borde */
+                right: 0; /* Pegado al borde */
+            }
+
+            #navigator {
+                max-width: 250px;
+            }
+
+            #container {
+                flex-direction: column;
+            }
+
+            #container>* {
+                flex: 1 1 100%;
+            }
+
+            #sidebar {
+                max-width: 100%;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado -->
+    <header>
+        <div class="header-container">
+            <!-- Los GIFs de la izquierda y derecha han sido eliminados -->
+            <img src="https://media.discordapp.net/attachments/1386449778061082799/1403001278283386950/PinguChibidrogas.png?ex=689be503&is=689a9383&hm=695bd50ec8ad4741b90bd62c438b39e6f0fd8afa79dfadaee324f25bef3ca874&=&format=webp&quality=lossless&width=643&height=804" class="welcome-center" alt="Personaje chibi de pinguin.dark con cuernos y ojos hipnotizantes">
+
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="es">ES</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenedor principal -->
+    <div id="container">
+        <!-- Navegador -->
+        <nav id="navigator">
+            <h2 data-i18n="navegacion">Navegación</h2>
+            <ul>
+                <li><a data-i18n='inicio' href='#' data-target-tab="inicio-section" class="nav-tab-link active-nav">Inicio</a></li>
+                <li><a data-i18n='sobre_mi' href='#' data-target-tab="sobre-mi-section" class="nav-tab-link">Sobre Mí</a></li>
+            </ul>
+            <br><br>
+            <!-- El botón de Tienda ha sido eliminado -->
+        </nav>
+
+        <!-- Contenido principal -->
+        <main>
+            <!-- Las secciones de contenido ahora se controlan exclusivamente por los enlaces de navegación -->
+
+            <section id="inicio-section" class="content-section tab-content">
+                <h2 data-i18n="inicio_titulo">Bienvenido</h2>
+                <p data-i18n="inicio_texto">
+                    ¡Hola! Soy **Pinguin.dark**, tu rincón favorito para memes, risas y contenido original. Me aventuro como VTuber y YouTuber para compartir mi viaje y hacer tu día un poco más divertido. ¡Explora mi universo de humor y buena vibra!
+                </p>
+            </section>
+
+            <section id="sobre-mi-section" class="content-section tab-content">
+                <h2 data-i18n="sobre_mi_titulo">Sobre Mí</h2>
+                <p data-i18n="sobre_mi_texto">
+                    ¡Hola a todos! Soy Pinguin Dark y este es el comienzo de algo nuevo. En este video, hablo sobre quién soy realmente, sin filtros ni pretensiones. Mi vida ha tenido sus altos y bajos, y aunque no siempre hago cosas grandiosas, me mantengo fiel a lo que me gusta: leer, ver anime, escuchar música y, sobre todo, compartir memes que alegran el día. No busco la fama, solo pasar un buen rato y, si es posible, sacarte una sonrisa. ¡Bienvenidos a este espacio! Espero que disfruten lo que está por venir.
+                </p>
+                <div class="video-responsive-container">
+                    <iframe src="https://www.youtube.com/embed/lAJM0ZKIQuw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </section>
+        </main>
+
+        <!-- Barra lateral -->
+        <aside id="sidebar">
+            <div id="contact-list">
+                <h2 data-i18n="redes_sociales">Redes Sociales</h2> <!-- Título actualizado -->
+                <br>
+                <div id="contact">
+                    <a href="https://discord.com/invite/sxkDabW5MU" target="_blank" class="boton">
+                        <img src="https://placehold.co/40x40/5865F2/FFFFFF?text=DC" alt="Icono de Discord">
+                        <span>Discord</span>
+                    </a>
+                    <a href="https://www.instagram.com/pinguin.dark?igsh=bTIwb214ZTgwdjhr" target="_blank" class="boton">
+                        <img src="https://placehold.co/40x40/E1306C/FFFFFF?text=IG" alt="Icono de Instagram">
+                        <span>Instagram</span>
+                    </a>
+                    <a href="https://www.twitch.tv/pinguin_dark" target="_blank" class="boton">
+                        <img src="https://placehold.co/40x40/9146FF/FFFFFF?text=Twitch" alt="Icono de Twitch">
+                        <span>Twitch</span>
+                    </a>
+                    <a href="https://www.youtube.com/@pinguin_darkk" target="_blank" class="boton">
+                        <img src="https://placehold.co/40x40/FF0000/FFFFFF?text=YT" alt="Icono de Youtube">
+                        <span>Youtube</span>
+                    </a>
+                    <a href="https://x.com/pinguin_dark_" target="_blank" class="boton">
+                        <img src="https://placehold.co/40x40/000000/FFFFFF?text=X" alt="Icono de Twitter">
+                        <span>Twitter</span>
+                    </a>
+                    <a href="https://open.spotify.com/user/pwusbfjz6tcpfous7gbz7aet4" target="_blank" class="boton">
+                        <img src="https://placehold.co/40x40/1DB954/FFFFFF?text=SP" alt="Icono de Spotify">
+                        <span>Spotify</span>
+                    </a>
+                </div>
+            </div>
+        </aside>
+    </div>
+    <footer>
+        <p>
+            &copy; 2025 Pinguin.dark |
+            <a href="https://linktr.ee/pinguin_dark" target="_blank">Linktree</a> |
+            <!-- El enlace de Tienda ha sido eliminado del footer -->
+            <span class="dev-credit">Diseñado por <a href="https://github.com/Moisescx"
+                    target="_blank">MMarin</a></span>
+        </p>
+    </footer>
+
+    <script>
+        // translation.js
+        const translations = {
+            es: {
+                navegacion: "Navegación",
+                inicio: "Inicio",
+                sobre_mi: "Sobre Mí",
+                // La clave 'tienda' ha sido eliminada
+                inicio_titulo: "Bienvenido",
+                inicio_texto: "¡Hola! Soy Pinguin.dark, tu rincón favorito para memes, risas y contenido original. Me aventuro como VTuber y YouTuber para compartir mi viaje y hacer tu día un poco más divertido. ¡Explora mi universo de humor y buena vibra!",
+                sobre_mi_titulo: "Sobre Mí",
+                sobre_mi_texto: "¡Hola a todos! Soy Pinguin Dark y este es el comienzo de algo nuevo. En este video, hablo sobre quién soy realmente, sin filtros ni pretensiones. Mi vida ha tenido sus altos y bajos, y aunque no siempre hago cosas grandiosas, me mantengo fiel a lo que me gusta: leer, ver anime, escuchar música y, sobre todo, compartir memes que alegran el día. No busco la fama, solo pasar un buen rato y, si es posible, sacarte una sonrisa. ¡Bienvenidos a este espacio! Espero que disfruten lo que está por venir.",
+                redes_sociales: "Redes Sociales" // Clave de traducción actualizada
+            },
+            en: {
+                navegacion: "Navigation",
+                inicio: "Home",
+                sobre_mi: "About Me",
+                // The 'tienda' key has been removed
+                inicio_titulo: "Welcome",
+                inicio_texto: "Hello! I'm Pinguin.dark, your favorite corner for memes, laughs, and original content. I'm venturing as a VTuber and YouTuber to share my journey and make your day a little more fun. Explore my universe of humor and good vibes!",
+                sobre_mi_titulo: "About Me",
+                sobre_mi_texto: "Hello everyone! I'm Pinguin Dark and this is the beginning of something new. In this video, I talk about who I really am, without filters or pretensions. My life has had its ups and downs, and although I don't always do great things, I remain true to what I like: reading, watching anime, listening to music, and, above all, sharing memes that brighten the day. I'm not looking for fame, just to have a good time and, if possible, make you smile. Welcome to this space! I hope you enjoy what's to come.",
+                redes_sociales: "Social Media" // Clave de traducción actualizada
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Define setLanguage function here, inside the DOMContentLoaded callback
+            function setLanguage(lang) {
+                document.querySelectorAll('[data-i18n]').forEach(element => {
+                    const key = element.getAttribute('data-i18n');
+                    if (translations[lang] && translations[lang][key]) {
+                        element.textContent = translations[lang][key];
+                    }
+                });
+            }
+
+            // Inicializar el idioma
+            const langButtons = document.querySelectorAll('.lang-btn');
+            const storedLang = localStorage.getItem('lang') || 'es'; // Default to Spanish
+            setLanguage(storedLang);
+
+            langButtons.forEach(button => {
+                if (button.dataset.lang === storedLang) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+
+                button.addEventListener('click', () => {
+                    langButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    const newLang = button.dataset.lang;
+                    setLanguage(newLang);
+                    localStorage.setItem('lang', newLang); // Store preference
+                });
+            });
+
+            // Función para mostrar la pestaña seleccionada
+            function showTab(tabId) {
+                // Oculta todas las secciones de contenido de pestañas
+                document.querySelectorAll('.tab-content').forEach(section => {
+                    section.classList.remove('active-content'); // Remover la clase activa
+                });
+
+                // Muestra la sección de contenido de la pestaña seleccionada
+                const activeSection = document.getElementById(tabId);
+                if (activeSection) {
+                    activeSection.classList.add('active-content'); // Añadir la clase activa
+                }
+
+                // Actualiza el estado activo de los enlaces de navegación
+                document.querySelectorAll('.nav-tab-link').forEach(link => {
+                    if (link.dataset.targetTab === tabId) {
+                        link.classList.add('active-nav');
+                    } else {
+                        link.classList.remove('active-nav');
+                    }
+                });
+            }
+
+            // Configurar los enlaces de navegación para activar las pestañas
+            document.querySelectorAll('.nav-tab-link').forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault(); // Prevenir el comportamiento de anclaje por defecto
+                    const targetTab = link.dataset.targetTab;
+                    showTab(targetTab);
+                });
+            });
+
+            // Mostrar la pestaña de inicio por defecto al cargar la página
+            showTab('inicio-section');
+        });
+    </script>
+</body>
+</html>
