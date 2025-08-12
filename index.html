@@ -14,7 +14,6 @@
         rel="stylesheet">
     <title>Pinguin.dark - Memes y Vtuber</title>
     <style>
-        /* Reset de márgenes y padding para todos los elementos */
         * {
             margin: 0;
             padding: 0;
@@ -40,11 +39,10 @@
         }
 
         .lang-btn.active {
-            background: #A06CD5; /* Un morado más vibrante del fondo */
+            background: #A06CD5;
             font-weight: bold;
         }
 
-        /*Animaciones*/
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -69,15 +67,14 @@
             }
         }
 
-        /* Animación de "respiración" para el personaje central */
         @keyframes breathing {
             0% {
                 transform: scale(1);
                 filter: brightness(1);
             }
             50% {
-                transform: scale(1.02); /* Ligeramente más grande */
-                filter: brightness(1.1); /* Un poco más brillante */
+                transform: scale(1.02);
+                filter: brightness(1.1);
             }
             100% {
                 transform: scale(1);
@@ -85,7 +82,6 @@
             }
         }
 
-        /* Animación para el indicador de LIVE */
         @keyframes livePulse {
             0% {
                 transform: scale(1);
@@ -115,7 +111,6 @@
             }
         }
 
-        /* Animación para partículas flotantes */
         @keyframes floatParticles {
             0% {
                 transform: translateY(0) translateX(0) rotate(0deg);
@@ -141,11 +136,11 @@
 
 
         :root {
-            --color-primario: #F0E6F6; /* Un blanco violáceo suave, brillante para títulos */
-            --color-secundario: #D4BDED; /* Un morado claro para texto general, legible */
-            --fondo-transparente: rgba(45, 12, 87, 0.7); /* Un morado oscuro semi-transparente */
-            --sombra: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
-            --borde: 2px solid #8A4FBC; /* Un morado medio para los bordes */
+            --color-primario: #F0E6F6;
+            --color-secundario: #D4BDED;
+            --fondo-transparente: rgba(45, 12, 87, 0.7);
+            --sombra: 0 4px 8px rgba(0, 0, 0, 0.3);
+            --borde: 2px solid #8A4FBC;
         }
 
         body::before {
@@ -156,13 +151,11 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
-            /* Overlay oscuro */
             z-index: -1;
         }
 
-        /* Estilos generales del body */
         body {
-            background-image: url("https://i.imgur.com/YOzuJpD.png"); /* Fondo actualizado */
+            background-image: url("https://i.imgur.com/YOzuJpD.png");
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
@@ -175,7 +168,6 @@
             z-index: 1;
             position: relative;
             padding-bottom: 50px;
-            /* Espaciado al final de la página */
         }
 
         .header-container {
@@ -184,36 +176,33 @@
             width: 100%;
             align-items: flex-start;
             justify-content: center;
-            /* Espacio entre los elementos */
             max-width: 1100px;
             padding-top: 20px;
             margin: auto;
         }
 
-        /* Ajustes para la imagen central del encabezado */
         .welcome-center {
-            max-height: 180px; /* Tamaño principal para el personaje */
-            width: 180px; /* Establecer un ancho fijo para el círculo */
-            height: 180px; /* Establecer una altura fija para el círculo */
-            object-fit: cover; /* Asegura que la imagen cubra el círculo sin distorsionarse */
-            border-radius: 50%; /* ¡Hace la imagen circular! */
-            overflow: hidden; /* Recorta cualquier parte de la imagen que se salga del círculo */
+            max-height: 180px;
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            overflow: hidden;
             z-index: 1;
             margin: 0 20px;
             filter: drop-shadow(0 0 10px #D4BDED)
             drop-shadow(0 0 30px #A06CD5);
-            animation: breathing 3s infinite ease-in-out; /* Aplicar la animación de respiración */
-            border: 3px solid var(--color-primario); /* Borde alrededor del círculo */
+            animation: breathing 3s infinite ease-in-out;
+            border: 3px solid var(--color-primario);
         }
 
-        /* Partículas flotantes en el encabezado */
         .floating-particle {
             position: absolute;
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            opacity: 0; /* Oculto por defecto */
+            opacity: 0;
             animation: floatParticles linear infinite;
-            z-index: 0; /* Detrás del contenido principal del header */
+            z-index: 0;
         }
         .particle-1 { width: 10px; height: 10px; top: 30px; left: 10%; animation-duration: 10s; animation-delay: 0s; }
         .particle-2 { width: 8px; height: 8px; top: 80px; left: 25%; animation-duration: 12s; animation-delay: 2s; }
@@ -222,32 +211,28 @@
         .particle-5 { width: 9px; height: 9px; top: 120px; left: 20%; animation-duration: 9s; animation-delay: 0.5s; }
 
 
-        /* Las reglas para .left-lantern y .right-lantern han sido eliminadas */
-
-        /* Estilos para el indicador de LIVE */
         .live-indicator {
-            background-color: #E53935; /* Rojo vibrante */
+            background-color: #E53935;
             color: white;
             font-weight: bold;
             padding: 5px 10px;
             border-radius: 5px;
             position: absolute;
-            top: 10px; /* Ajusta la posición según sea necesario */
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 10;
-            animation: livePulse 1.5s infinite ease-in-out; /* Animación de pulsación */
-            display: none; /* Oculto por defecto, se muestra con JS */
+            animation: livePulse 1.5s infinite ease-in-out;
+            display: none;
             font-size: 0.9em;
             letter-spacing: 1px;
             box-shadow: 0 0 8px rgba(229, 57, 53, 0.7);
         }
         .live-indicator.is-live {
-            display: block; /* Mostrar cuando está en vivo */
+            display: block;
         }
 
 
-        /* Títulos principales */
         h1,
         h2 {
             font-weight: 400;
@@ -263,7 +248,7 @@
         }
 
         .button-53 {
-            background-color: #6C4675; /* Morado más oscuro, del fondo */
+            background-color: #6C4675;
             border: 0 solid #E5E7EB;
             box-sizing: border-box;
             color: #ffffff;
@@ -314,10 +299,8 @@
         }
 
 
-        /* Estilo de la navegación */
         #navigator {
             background: var(--fondo-transparente);
-            /* Fondo oscuro con opacidad */
             padding: 15px;
             border-radius: 12px;
             margin-bottom: 20px;
@@ -326,7 +309,6 @@
             display: flex;
             overflow: hidden;
             flex-direction: column;
-            /* Ajustar el ancho del menú */
             max-width: 200px;
             overflow-y: auto;
             outline: var(--borde)
@@ -346,68 +328,58 @@
             margin-bottom: 10px;
         }
 
-        #navigator ul li a { /* Estilo para los enlaces de navegación */
+        #navigator ul li a {
             text-decoration: none;
             color: var(--color-secundario);
             font-weight: bold;
             font-size: 1rem;
-            transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease; /* Añadida transición para transform */
-            padding: 5px 10px; /* Añadido padding para mejor área de clic */
+            transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+            padding: 5px 10px;
             border-radius: 5px;
-            display: flex; /* Usar flexbox para alinear icono y texto */
-            align-items: center; /* Centrar verticalmente */
-            gap: 8px; /* Espacio entre icono y texto */
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         #navigator ul li a:hover {
-            color: #A06CD5; /* Morado vibrante */
-            background-color: rgba(255, 255, 255, 0.1); /* Fondo sutil al pasar el mouse */
-            transform: translateX(5px); /* Pequeño desplazamiento al pasar el mouse */
+            color: #A06CD5;
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
         }
 
-        #navigator ul li a.active-nav { /* Estilo para el enlace de navegación activo */
-            background-color: var(--borde); /* Color de borde para el activo */
+        #navigator ul li a.active-nav {
+            background-color: var(--borde);
             color: var(--color-primario);
             text-decoration: none;
-            transform: translateX(0); /* Asegura que no se desplace si ya estaba activo */
+            transform: translateX(0);
         }
 
-        /* Estilo para los iconos SVG dentro de la navegación */
         #navigator ul li a svg {
-            width: 1em; /* Ajustar tamaño del icono al tamaño de fuente */
+            width: 1em;
             height: 1em;
-            fill: currentColor; /* El color del icono será el mismo que el del texto del enlace */
+            fill: currentColor;
         }
 
 
-        /* Estilos para el contenedor principal */
         #container {
             width: 100%;
             max-width: 900px;
-            /* Más ancho en pantallas grandes */
             min-width: 10%;
-            /* Se ajusta en móviles */
             margin: 20px auto;
-            /* Centrar */
             min-height: calc(100vh - 150px);
-            /* Altura mínima para que el contenido ocupe casi toda la pantalla */
             display: flex;
             margin-bottom: 50px;
             flex-wrap: wrap;
-            /* Permite que los elementos se adapten a la siguiente línea */
             justify-content: space-between;
             align-items: flex-start;
             gap: clamp(5px, 2vw, 20px);
-            /* Espaciado dinámico */
         }
 
         #container>* {
             flex: 1 1 calc(33% - 15px);
-            /* Asegura que los elementos ocupen 1/3 del ancho, con un espaciado de 15px */
             box-sizing: border-box;
         }
 
-        /* Contenido principal - Sección individual */
         .content-section {
             background: var(--fondo-transparente);
             border-radius: 12px;
@@ -416,34 +388,33 @@
             color: var(--color-primario);
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
             outline: var(--borde);
-            margin-bottom: 20px; /* Espaciado entre secciones */
-            flex: 2; /* Para que ocupe el espacio principal */
-            opacity: 0; /* Inicialmente transparente para la transición */
-            transform: translateY(10px); /* Ligeramente desplazado para la transición */
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Transición suave */
+            margin-bottom: 20px;
+            flex: 2;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
 
-        /* Ocultar secciones de contenido que no están activas */
         .tab-content {
-            display: none; /* Por defecto, todas las secciones de contenido de pestañas están ocultas */
+            display: none;
         }
 
         .tab-content.active-content {
-            display: block; /* Mostrar solo la sección de contenido activa */
-            opacity: 1; /* Hacer visible */
-            transform: translateY(0); /* Volver a la posición original */
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
         }
 
 
         .video-responsive-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio (divide height by width, 9/16 = 0.5625) */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             max-width: 100%;
             background: #000;
-            margin-top: 20px; /* Espacio encima del video */
-            border-radius: 8px; /* Bordes redondeados para el contenedor del video */
+            margin-top: 20px;
+            border-radius: 8px;
         }
 
         .video-responsive-container iframe {
@@ -455,20 +426,19 @@
             border: 0;
         }
 
-        /* Estilos para la Galería de Memes */
         .meme-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Columnas responsivas */
-            gap: 15px; /* Espaciado entre memes */
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
             padding: 10px;
-            justify-items: center; /* Centrar items en la cuadrícula */
-            align-items: center; /* Centrar items verticalmente */
+            justify-items: center;
+            align-items: center;
         }
 
         .meme-item-container {
             position: relative;
             width: 100%;
-            padding-bottom: 100%; /* Para mantener la relación de aspecto cuadrada */
+            padding-bottom: 100%;
             overflow: hidden;
             border-radius: 8px;
             box-shadow: var(--sombra);
@@ -486,7 +456,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Asegura que la imagen cubra el contenedor */
+            object-fit: cover;
             border-radius: 8px;
         }
 
@@ -528,14 +498,13 @@
         }
 
 
-        /* Estilos para la sección de Streams */
         .stream-schedule ul {
-            list-style: none; /* Eliminar viñetas por defecto */
+            list-style: none;
             padding: 0;
         }
 
         .stream-schedule li {
-            background-color: rgba(255, 255, 255, 0.05); /* Fondo sutil para cada ítem */
+            background-color: rgba(255, 255, 255, 0.05);
             margin-bottom: 10px;
             padding: 10px 15px;
             border-radius: 8px;
@@ -545,14 +514,13 @@
         }
 
         .stream-schedule li strong {
-            color: #FF70A6; /* Resaltar los días */
+            color: #FF70A6;
         }
 
-        /* Estilos para la Galería de Clips */
         .clips-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Columnas responsivas para videos */
-            gap: 20px; /* Espaciado entre clips */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
             padding: 10px;
             justify-items: center;
             align-items: start;
@@ -560,9 +528,8 @@
 
         .clip-item {
             width: 100%;
-            /* Ajuste para que el contenedor del iframe sea responsivo */
             position: relative;
-            padding-bottom: 56.25%; /* Relación de aspecto 16:9 para el video */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             border-radius: 8px;
@@ -575,25 +542,20 @@
         }
 
         .clip-item iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
+            height: 150px;
             border: 0;
             display: block;
         }
 
 
-        /* Barra lateral */
         #sidebar {
             background: var(--fondo-transparente);
-            /* Fondo oscuro con opacidad */
+            padding: 15px;
             border-radius: 12px;
             box-shadow: var(--sombra);
             overflow: hidden;
             flex: 1;
-            /* Hace que la sidebar sea más pequeña */
             width: 100%;
             max-width: 250px;
             min-width: 200px;
@@ -601,26 +563,22 @@
             outline: var(--borde);
         }
 
-        /* Estilos para el contacto */
-
-        #contact { /* Cambiado de .contact-list a #contact para el grid de botones de redes sociales */
+        #contact {
             display: grid;
-            /* Usa CSS Grid para organizar en columnas */
-            grid-template-columns: repeat(1, 1fr); /* Una columna para que cada botón ocupe el 100% del ancho */
-            gap: 10px; /* Espaciado entre elementos */
+            grid-template-columns: repeat(1, 1fr);
+            gap: 10px;
         }
 
         .boton {
             display: flex;
-            margin-bottom: 0px; /* Eliminado el margen inferior, ahora lo controla el gap del grid */
+            margin-bottom: 0px;
             align-items: center;
             width: 100%;
-            /* Permite que se ajuste dentro de la grid */
             padding: 10px 15px;
-            background-color: #E6E0F1; /* Un blanco violáceo muy claro para los botones */
+            background-color: #E6E0F1;
             border-radius: 50px;
             text-decoration: none;
-            color: #4A235A; /* Un morado oscuro para el texto del botón */
+            color: #4A235A;
             font-size: 15px;
             font-weight: bold;
             position: relative;
@@ -632,52 +590,36 @@
             transform: scale(1.05);
         }
 
-        .boton img { /* Estilo para las imágenes de iconos de redes sociales */
+        .boton img {
             width: 40px;
             height: 40px;
-            border-radius: 50%; /* Hace la imagen circular */
+            border-radius: 0;
             margin-right: 10px;
-            padding: 5px; /* Pequeño padding para que el icono no toque el borde */
-            object-fit: contain; /* Asegura que el logo se vea completo dentro del círculo */
-            /* Colores de fondo específicos para los iconos */
-            background-color: transparent; /* Por defecto transparente, se sobrescribe por clase */
+            padding: 0;
+            object-fit: contain;
+            background-color: transparent;
         }
-        /* Colores de fondo específicos para los iconos */
-        .boton.discord img { background-color: #5865F2; } /* Azul Discord */
-        .boton.instagram img { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); } /* Gradiente Instagram */
-        .boton.twitch img { background-color: #9146FF; } /* Morado Twitch */
-        .boton.youtube img { background-color: #FF0000; } /* Rojo YouTube */
-        .boton.twitter img { background-color: #000000; } /* Negro X */
-        .boton.spotify img { background-color: #1DB954; } /* Verde Spotify */
 
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 20px;
             font-size: 0.9rem;
-            color: var(--color-secundario); /* Color más claro para el texto del footer */
+            color: var(--color-secundario);
         }
 
         footer a {
-            color: #FF70A6; /* Un rosa vibrante para los enlaces del footer */
+            color: #FF70A6;
             text-decoration: none;
         }
 
-        /* Estilo para los créditos de la foto de perfil */
         .profile-photo-credits {
-            display: block; /* Para que ocupe su propia línea */
-            font-size: 0.75rem; /* Más pequeño que el texto principal del footer */
-            color: rgba(212, 189, 237, 0.7); /* Un color más sutil */
-            margin-top: 5px; /* Pequeño espacio superior */
+            display: block;
+            font-size: 0.75rem;
+            color: rgba(212, 189, 237, 0.7);
+            margin-top: 5px;
         }
 
-        /* La clase .dev-credit ha sido eliminada del CSS */
-        /* ---------------------------------------------------- */
-        /* Media Queries para Responsive Design                 */
-        /* ---------------------------------------------------- */
-
-        /* Pantallas pequeñas (móviles - hasta 600px de ancho) */
         @media (max-width: 600px) {
             .header_text {
                 font-size: 2rem;
@@ -692,14 +634,11 @@
                 align-items: center;
             }
 
-            /* Ocultar los GIFs laterales en móviles para evitar solapamiento */
-            /* Las reglas para .left-lantern y .right-lantern han sido eliminadas */
-
             .welcome-center {
-                max-height: 120px; /* Reduce el tamaño del personaje en móviles */
-                max-width: 120px; /* Asegura que el círculo se mantenga en móviles */
-                width: 120px; /* Asegura que el círculo se mantenga en móviles */
-                height: 120px; /* Asegura que el círculo se mantenga en móviles */
+                max-height: 120px;
+                max-width: 120px;
+                width: 120px;
+                height: 120px;
             }
 
             .button-53 {
@@ -715,24 +654,23 @@
                 margin-bottom: 10px;
             }
 
-            /* Asegurar que la barra lateral puede encogerse completamente */
             #sidebar {
                 max-width: 100%;
-                min-width: auto; /* Permite que la barra lateral se adapte al contenido */
+                min-width: auto;
             }
 
             .meme-grid {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Columnas más pequeñas en móviles */
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
                 gap: 10px;
             }
 
             .clips-grid {
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Ajuste para móviles */
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
                 gap: 15px;
             }
 
             .clip-item iframe {
-                height: 100px; /* Altura más pequeña para clips en móviles */
+                height: 100px;
             }
 
             footer {
@@ -741,7 +679,6 @@
             }
         }
 
-        /* Pantallas medianas (tablets - hasta 768px de ancho) */
         @media (max-width: 768px) {
             .header_text {
                 font-size: 2.5rem;
@@ -751,14 +688,12 @@
                 font-size: 1rem;
             }
 
-            /* Ajustes para los GIFs y el personaje central en tablets */
             .welcome-center {
-                max-height: 150px; /* Tamaño del personaje en tablets */
-                max-width: 150px; /* Asegura que el círculo se mantenga en tablets */
-                width: 150px; /* Asegura que el círculo se mantenga en tablets */
-                height: 150px; /* Asegura que el círculo se mantenga en tablets */
+                max-height: 150px;
+                max-width: 150px;
+                width: 150px;
+                height: 150px;
             }
-            /* Las reglas para .left-lantern y .right-lantern han sido eliminadas */
 
             #navigator {
                 max-width: 250px;
@@ -778,64 +713,56 @@
             }
 
             .meme-grid {
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Ajuste para tablets */
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 15px;
             }
 
             .clips-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajuste para tablets */
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
             }
 
             .clip-item iframe {
-                height: 120px; /* Altura ajustada para clips en tablets */
+                height: 120px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Partículas flotantes en el fondo del encabezado -->
     <div class="floating-particle particle-1"></div>
     <div class="floating-particle particle-2"></div>
     <div class="floating-particle particle-3"></div>
     <div class="floating-particle particle-4"></div>
     <div class="floating-particle particle-5"></div>
 
-    <!-- Encabezado -->
     <header>
         <div class="header-container">
-            <!-- Los GIFs de la izquierda y derecha han sido eliminados -->
             <img src="https://cdn.discordapp.com/attachments/1386449776274575500/1402733365865484423/22.png?ex=689c3cff&is=689aeb7f&hm=0b9f15c73dc144908df133cb08c164124404d979a3841bfe38752a35890e2d7b&" class="welcome-center" alt="Foto de perfil de Pinguin.dark en forma de círculo">
 
             <div class="language-switcher">
                 <button class="lang-btn active" data-lang="es">ES</button>
                 <button class="lang-btn" data-lang="en">EN</button>
             </div>
-            <!-- Indicador de LIVE (simulado) -->
             <div id="live-status" class="live-indicator">
                 LIVE
             </div>
         </div>
     </header>
 
-    <!-- Contenedor principal -->
     <div id="container">
-        <!-- Navegador -->
         <nav id="navigator">
             <h2 data-i18n="navegacion">Navegación</h2>
             <ul>
-                <li><a data-i18n='inicio' href='#' data-target-tab="inicio-section" class="nav-tab-link active-nav"><i class="fas fa-home"></i> Inicio</a></li>
-                <li><a data-i18n='sobre_mi' href='#' data-target-tab="sobre-mi-section" class="nav-tab-link"><i class="fas fa-user"></i> Sobre Mí</a></li>
-                <li><a data-i18n='memes' href='#' data-target-tab="memes-section" class="nav-tab-link"><i class="fas fa-laugh-squint"></i> Memes</a></li>
-                <li><a data-i18n='streams' href='#' data-target-tab="streams-section" class="nav-tab-link"><i class="fas fa-video"></i> Streams</a></li>
-                <li><a data-i18n='clips' href='#' data-target-tab="clips-section" class="nav-tab-link"><i class="fas fa-film"></i> Clips</a></li>
+                <li><a data-i18n='inicio' href='#' data-target-tab="inicio-section" class="nav-tab-link active-nav">Inicio</a></li>
+                <li><a data-i18n='sobre_mi' href='#' data-target-tab="sobre-mi-section" class="nav-tab-link">Sobre Mí</a></li>
+                <li><a data-i18n='memes' href='#' data-target-tab="memes-section" class="nav-tab-link">Memes</a></li>
+                <li><a data-i18n='streams' href='#' data-target-tab="streams-section" class="nav-tab-link">Streams</a></li>
+                <li><a data-i18n='clips' href='#' data-target-tab="clips-section" class="nav-tab-link">Clips</a></li>
             </ul>
             <br><br>
-            <!-- El botón de Tienda ha sido eliminado -->
         </nav>
 
-        <!-- Contenido principal -->
         <main>
-            <!-- Las secciones de contenido ahora se controlan exclusivamente por los enlaces de navegación -->
-
             <section id="inicio-section" class="content-section tab-content">
                 <h2 data-i18n="inicio_titulo">Bienvenido</h2>
                 <p data-i18n="inicio_texto">
@@ -916,7 +843,6 @@
                     ¡Revive los momentos más divertidos y épicos de mis streams y videos!
                 </p>
                 <div class="clips-grid">
-                    <!-- Clips de Twitch de pinguin_dark -->
                     <div class="clip-item">
                         <iframe src="https://clips.twitch.tv/embed?clip=FamousFrailKaleUWot-NtaC5bc9rvTm1usu&parent=pingudarku.github.io" frameborder="0" allowfullscreen="true" scrolling="no"></iframe>
                     </div>
@@ -926,39 +852,37 @@
                     <div class="clip-item">
                         <iframe src="https://clips.twitch.tv/embed?clip=EnchantingAthleticButterflyJebaited-XTlRF9voWiqCe9YH&parent=pingudarku.github.io" frameborder="0" allowfullscreen="true" scrolling="no"></iframe>
                     </div>
-                    <!-- Puedes añadir más clips aquí siguiendo el mismo formato -->
                 </div>
             </section>
         </main>
 
-        <!-- Barra lateral -->
         <aside id="sidebar">
             <div id="contact-list">
-                <h2 data-i18n="redes_sociales">Redes Sociales</h2> <!-- Título actualizado -->
+                <h2 data-i18n="redes_sociales">Redes Sociales</h2>
                 <br>
                 <div id="contact">
                     <a href="https://discord.com/invite/sxkDabW5MU" target="_blank" class="boton discord">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Discord_logo.svg" alt="Icono de Discord">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Icono de Discord">
                         <span>Discord</span>
                     </a>
                     <a href="https://www.instagram.com/pinguin.dark?igsh=bTIwb214ZTgwdjhr" target="_blank" class="boton instagram">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Icono de Instagram">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Icono de Instagram">
                         <span>Instagram</span>
                     </a>
                     <a href="https://www.twitch.tv/pinguin_dark" target="_blank" class="boton twitch">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Twitch_Glitch_Logo_Purple.svg" alt="Icono de Twitch">
+                        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968819.png" alt="Icono de Twitch">
                         <span>Twitch</span>
                     </a>
                     <a href="https://www.youtube.com/@pinguin_darkk" target="_blank" class="boton youtube">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="Icono de Youtube">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="Icono de Youtube">
                         <span>Youtube</span>
                     </a>
                     <a href="https://x.com/pinguin_dark_" target="_blank" class="boton twitter">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg" alt="Icono de Twitter">
+                        <img src="https://cdn-icons-png.flaticon.com/512/5969/5969020.png" alt="Icono de Twitter (X)">
                         <span>Twitter</span>
                     </a>
                     <a href="https://open.spotify.com/user/pwusbfjz6tcpfous7gbz7aet4" target="_blank" class="boton spotify">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Icono de Spotify">
+                        <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_Black.png" alt="Icono de Spotify">
                         <span>Spotify</span>
                     </a>
                 </div>
@@ -974,7 +898,6 @@
     </footer>
 
     <script>
-        // translation.js
         const translations = {
             es: {
                 navegacion: "Navegación",
@@ -1075,11 +998,8 @@
                 });
             });
 
-            // Lógica para el indicador de LIVE (simulado)
             const liveIndicator = document.getElementById('live-status');
-            // Para una implementación real, esta variable se obtendría de una API de Twitch a través de un backend.
-            // Por ahora, puedes cambiarla manualmente a 'true' o 'false' para simular el estado.
-            const isLive = true; // Simular que está en vivo por defecto
+            const isLive = true;
 
             if (isLive) {
                 liveIndicator.classList.add('is-live');
