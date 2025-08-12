@@ -69,6 +69,38 @@
             }
         }
 
+        /* Animación de "respiración" para el personaje central */
+        @keyframes breathing {
+            0% {
+                transform: scale(1);
+                filter: brightness(1);
+            }
+            50% {
+                transform: scale(1.02); /* Ligeramente más grande */
+                filter: brightness(1.1); /* Un poco más brillante */
+            }
+            100% {
+                transform: scale(1);
+                filter: brightness(1);
+            }
+        }
+
+        /* Animación para el indicador de LIVE */
+        @keyframes livePulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
         @keyframes pulse {
             0% {
                 transform: scale(1);
@@ -141,9 +173,33 @@
             margin: 0 20px;
             filter: drop-shadow(0 0 10px #D4BDED)
             drop-shadow(0 0 30px #A06CD5);
+            animation: breathing 3s infinite ease-in-out; /* Aplicar la animación de respiración */
         }
 
         /* Las reglas para .left-lantern y .right-lantern han sido eliminadas */
+
+        /* Estilos para el indicador de LIVE */
+        .live-indicator {
+            background-color: #E53935; /* Rojo vibrante */
+            color: white;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            position: absolute;
+            top: 10px; /* Ajusta la posición según sea necesario */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            animation: livePulse 1.5s infinite ease-in-out; /* Animación de pulsación */
+            display: none; /* Oculto por defecto, se muestra con JS */
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            box-shadow: 0 0 8px rgba(229, 57, 53, 0.7);
+        }
+        .live-indicator.is-live {
+            display: block; /* Mostrar cuando está en vivo */
+        }
+
 
         /* Títulos principales */
         h1,
@@ -337,25 +393,78 @@
             border: 0;
         }
 
-
-        /* Estilo para los posts */
-        #posts-image {
-            width: 100px;
-            /* Ancho fijo */
-            max-width: 100%;
-            /* Evita que la imagen sobresalga */
-            height: auto;
-            /* Mantiene la relación original */
-            object-fit: cover;
-            /* Recorta la imagen para ajustarla bien sin distorsión */
-            border-radius: 5px;
-            display: block;
-            /* Para asegurar centrado */
-            margin: 15px auto;
-            /* Centra la imagen */
-            box-shadow: var(--sombra);
-            /* Pequeña sombra para resaltar */
+        /* Estilos para la Galería de Memes */
+        .meme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Columnas responsivas */
+            gap: 15px; /* Espaciado entre memes */
+            padding: 10px;
+            justify-items: center; /* Centrar items en la cuadrícula */
+            align-items: center; /* Centrar items verticalmente */
         }
+
+        .meme-item {
+            width: 100%; /* Ocupa el ancho disponible en la columna */
+            height: auto; /* Mantiene la proporción */
+            border-radius: 8px; /* Bordes redondeados */
+            box-shadow: var(--sombra); /* Sombra para resaltar */
+            transition: transform 0.2s ease-in-out; /* Transición suave al pasar el mouse */
+            cursor: pointer;
+        }
+
+        .meme-item:hover {
+            transform: scale(1.05); /* Ligeramente más grande al pasar el mouse */
+        }
+
+        /* Estilos para la sección de Streams */
+        .stream-schedule ul {
+            list-style: none; /* Eliminar viñetas por defecto */
+            padding: 0;
+        }
+
+        .stream-schedule li {
+            background-color: rgba(255, 255, 255, 0.05); /* Fondo sutil para cada ítem */
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1.1em;
+            color: var(--color-primario);
+        }
+
+        .stream-schedule li strong {
+            color: #FF70A6; /* Resaltar los días */
+        }
+
+        /* Estilos para la Galería de Clips */
+        .clips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Columnas responsivas para videos */
+            gap: 20px; /* Espaciado entre clips */
+            padding: 10px;
+            justify-items: center;
+            align-items: start;
+        }
+
+        .clip-item {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            overflow: hidden; /* Asegura que el iframe no se salga */
+            box-shadow: var(--sombra);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .clip-item:hover {
+            transform: scale(1.02);
+        }
+
+        .clip-item iframe {
+            width: 100%;
+            height: 150px; /* Altura fija para los clips en la cuadrícula */
+            display: block;
+        }
+
 
         /* Barra lateral */
         #sidebar {
@@ -451,10 +560,7 @@
             }
 
             /* Ocultar los GIFs laterales en móviles para evitar solapamiento */
-            .left-lantern,
-            .right-lantern {
-                display: none;
-            }
+            /* Las reglas para .left-lantern y .right-lantern han sido eliminadas */
 
             .welcome-center {
                 max-height: 120px; /* Reduce el tamaño del personaje en móviles */
@@ -481,10 +587,18 @@
                 min-width: auto; /* Permite que la barra lateral se adapte al contenido */
             }
 
-            #posts-image {
-                width: 100%;
-                max-width: 100%;
-                height: auto;
+            .meme-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Columnas más pequeñas en móviles */
+                gap: 10px;
+            }
+
+            .clips-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Ajuste para móviles */
+                gap: 15px;
+            }
+
+            .clip-item iframe {
+                height: 100px; /* Altura más pequeña para clips en móviles */
             }
 
             footer {
@@ -507,13 +621,7 @@
             .welcome-center {
                 max-height: 150px; /* Tamaño del personaje en tablets */
             }
-            .left-lantern,
-            .right-lantern {
-                max-height: 130px; /* Tamaño de los GIFs en tablets */
-                max-width: 150px; /* Limitar el ancho también en tablets */
-                left: 0; /* Pegado al borde */
-                right: 0; /* Pegado al borde */
-            }
+            /* Las reglas para .left-lantern y .right-lantern han sido eliminadas */
 
             #navigator {
                 max-width: 250px;
@@ -531,6 +639,18 @@
                 max-width: 100%;
                 padding: 15px;
             }
+
+            .meme-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Ajuste para tablets */
+            }
+
+            .clips-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajuste para tablets */
+            }
+
+            .clip-item iframe {
+                height: 120px; /* Altura ajustada para clips en tablets */
+            }
         }
     </style>
 </head>
@@ -545,6 +665,10 @@
                 <button class="lang-btn active" data-lang="es">ES</button>
                 <button class="lang-btn" data-lang="en">EN</button>
             </div>
+            <!-- Indicador de LIVE (simulado) -->
+            <div id="live-status" class="live-indicator">
+                LIVE
+            </div>
         </div>
     </header>
 
@@ -556,6 +680,9 @@
             <ul>
                 <li><a data-i18n='inicio' href='#' data-target-tab="inicio-section" class="nav-tab-link active-nav">Inicio</a></li>
                 <li><a data-i18n='sobre_mi' href='#' data-target-tab="sobre-mi-section" class="nav-tab-link">Sobre Mí</a></li>
+                <li><a data-i18n='memes' href='#' data-target-tab="memes-section" class="nav-tab-link">Memes</a></li>
+                <li><a data-i18n='streams' href='#' data-target-tab="streams-section" class="nav-tab-link">Streams</a></li>
+                <li><a data-i18n='clips' href='#' data-target-tab="clips-section" class="nav-tab-link">Clips</a></li>
             </ul>
             <br><br>
             <!-- El botón de Tienda ha sido eliminado -->
@@ -579,6 +706,64 @@
                 </p>
                 <div class="video-responsive-container">
                     <iframe src="https://www.youtube.com/embed/lAJM0ZKIQuw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </section>
+
+            <section id="memes-section" class="content-section tab-content">
+                <h2 data-i18n="memes_titulo">Galería de Memes</h2>
+                <div class="meme-grid">
+                    <img src="https://placehold.co/200x200/4F2077/F0E6F6?text=Meme+1" alt="Meme divertido 1" class="meme-item">
+                    <img src="https://placehold.co/200x200/A06CD5/FFFFFF?text=Meme+2" alt="Meme divertido 2" class="meme-item">
+                    <img src="https://placehold.co/200x200/6C4675/F0E6F6?text=Meme+3" alt="Meme divertido 3" class="meme-item">
+                    <img src="https://placehold.co/200x200/8A4FBC/FFFFFF?text=Meme+4" alt="Meme divertido 4" class="meme-item">
+                    <img src="https://placehold.co/200x200/D4BDED/4A235A?text=Meme+5" alt="Meme divertido 5" class="meme-item">
+                    <img src="https://placehold.co/200x200/FF70A6/FFFFFF?text=Meme+6" alt="Meme divertido 6" class="meme-item">
+                </div>
+            </section>
+
+            <section id="streams-section" class="content-section tab-content">
+                <h2 data-i18n="streams_titulo">Horarios de Stream</h2>
+                <p data-i18n="streams_intro_texto">
+                    ¡No te pierdas mis streams en Twitch! Aquí te dejo el horario habitual.
+                </p>
+                <div class="stream-schedule">
+                    <ul>
+                        <li data-i18n="stream_sabado"><strong>Sábados:</strong> 17:30 (GMT-3, Horario de Chile) - ¡Directo con la comunidad!</li>
+                    </ul>
+                </div>
+                <p data-i18n="stream_redes_sociales">
+                    ¡Para streams sorpresa o cambios de horario, **mantente atento a mis redes sociales**!
+                </p>
+            </section>
+
+            <section id="clips-section" class="content-section tab-content">
+                <h2 data-i18n="clips_titulo">Momentos Destacados</h2>
+                <p data-i18n="clips_intro_texto">
+                    ¡Revive los momentos más divertidos y épicos de mis streams y videos!
+                </p>
+                <div class="clips-grid">
+                    <!-- Para integrar tus clips de Twitch:
+                         1. Ve a tu Panel de Creador en Twitch -> Contenido -> Clips.
+                         2. Busca tus clips más vistos.
+                         3. Haz clic en el clip y luego en "Compartir" -> "Incrustar".
+                         4. Copia el código <iframe> que te dan.
+                         5. Reemplaza los <iframe> de ejemplo a continuación con tus propios códigos.
+                         Asegúrate de que el 'src' del iframe apunte a la URL de incrustación de Twitch (ej: https://clips.twitch.tv/embed?clip=...)
+                         o YouTube (ej: https://www.youtube.com/embed/VIDEO_ID).
+                    -->
+                    <div class="clip-item">
+                        <iframe src="https://clips.twitch.tv/embed?clip=StupidMagnificentSquidBudStar-2eN2y3Y4x5z6W7&parent=tu-dominio.com" frameborder="0" allowfullscreen="true" scrolling="no" height="150" width="100%"></iframe>
+                        <!-- Reemplaza 'tu-dominio.com' con el dominio donde alojarás la página (ej: pingudarku.github.io) -->
+                    </div>
+                    <div class="clip-item">
+                        <iframe src="https://clips.twitch.tv/embed?clip=FantasticPreciousStingrayKappaPride-aBcD1eF2gH3iJ4&parent=tu-dominio.com" frameborder="0" allowfullscreen="true" scrolling="no" height="150" width="100%"></iframe>
+                    </div>
+                    <div class="clip-item">
+                        <iframe src="https://clips.twitch.tv/embed?clip=CharmingSaltyDragonflyCoolCat-xYz1aB2c3D4eF5&parent=tu-dominio.com" frameborder="0" allowfullscreen="true" scrolling="no" height="150" width="100%"></iframe>
+                    </div>
+                    <div class="clip-item">
+                        <iframe src="https://clips.twitch.tv/embed?clip=GracefulThoughtfulMooseKappa-6J7kL8mN9oP0qR&parent=tu-dominio.com" frameborder="0" allowfullscreen="true" scrolling="no" height="150" width="100%"></iframe>
+                    </div>
                 </div>
             </section>
         </main>
@@ -634,28 +819,45 @@
                 navegacion: "Navegación",
                 inicio: "Inicio",
                 sobre_mi: "Sobre Mí",
-                // La clave 'tienda' ha sido eliminada
+                memes: "Memes",
+                streams: "Streams",
+                clips: "Clips",
                 inicio_titulo: "Bienvenido",
                 inicio_texto: "¡Hola! Soy Pinguin.dark, tu rincón favorito para memes, risas y contenido original. Me aventuro como VTuber y YouTuber para compartir mi viaje y hacer tu día un poco más divertido. ¡Explora mi universo de humor y buena vibra!",
                 sobre_mi_titulo: "Sobre Mí",
                 sobre_mi_texto: "¡Hola a todos! Soy Pinguin Dark y este es el comienzo de algo nuevo. En este video, hablo sobre quién soy realmente, sin filtros ni pretensiones. Mi vida ha tenido sus altos y bajos, y aunque no siempre hago cosas grandiosas, me mantengo fiel a lo que me gusta: leer, ver anime, escuchar música y, sobre todo, compartir memes que alegran el día. No busco la fama, solo pasar un buen rato y, si es posible, sacarte una sonrisa. ¡Bienvenidos a este espacio! Espero que disfruten lo que está por venir.",
-                redes_sociales: "Redes Sociales" // Clave de traducción actualizada
+                redes_sociales: "Redes Sociales",
+                memes_titulo: "Galería de Memes",
+                streams_titulo: "Horarios de Stream",
+                streams_intro_texto: "¡No te pierdas mis streams en Twitch! Aquí te dejo el horario habitual.",
+                stream_sabado: "Sábados: 17:30 (GMT-3, Horario de Chile) - ¡Directo con la comunidad!",
+                stream_redes_sociales: "¡Para streams sorpresa o cambios de horario, mantente atento a mis redes sociales!",
+                clips_titulo: "Momentos Destacados",
+                clips_intro_texto: "¡Revive los momentos más divertidos y épicos de mis streams y videos!"
             },
             en: {
                 navegacion: "Navigation",
                 inicio: "Home",
                 sobre_mi: "About Me",
-                // The 'tienda' key has been removed
+                memes: "Memes",
+                streams: "Streams",
+                clips: "Clips",
                 inicio_titulo: "Welcome",
                 inicio_texto: "Hello! I'm Pinguin.dark, your favorite corner for memes, laughs, and original content. I'm venturing as a VTuber and YouTuber to share my journey and make your day a little more fun. Explore my universe of humor and good vibes!",
                 sobre_mi_titulo: "About Me",
                 sobre_mi_texto: "Hello everyone! I'm Pinguin Dark and this is the beginning of something new. In this video, I talk about who I really am, without filters or pretensions. My life has had its ups and downs, and although I don't always do great things, I remain true to what I like: reading, watching anime, listening to music, and, above all, sharing memes that brighten the day. I'm not looking for fame, just to have a good time and, if possible, make you smile. Welcome to this space! I hope you enjoy what's to come.",
-                redes_sociales: "Social Media" // Clave de traducción actualizada
+                redes_sociales: "Social Media",
+                memes_titulo: "Meme Gallery",
+                streams_titulo: "Stream Schedule",
+                streams_intro_texto: "Don't miss my streams on Twitch! Here is the usual schedule.",
+                stream_sabado: "Saturdays: 5:30 PM (GMT-3, Chile Time) - Live with the community!",
+                stream_redes_sociales: "For surprise streams or schedule changes, stay tuned to my social media!",
+                clips_titulo: "Highlights",
+                clips_intro_texto: "Relive the funniest and most epic moments from my streams and videos!"
             }
         };
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Define setLanguage function here, inside the DOMContentLoaded callback
             function setLanguage(lang) {
                 document.querySelectorAll('[data-i18n]').forEach(element => {
                     const key = element.getAttribute('data-i18n');
@@ -665,9 +867,8 @@
                 });
             }
 
-            // Inicializar el idioma
             const langButtons = document.querySelectorAll('.lang-btn');
-            const storedLang = localStorage.getItem('lang') || 'es'; // Default to Spanish
+            const storedLang = localStorage.getItem('lang') || 'es';
             setLanguage(storedLang);
 
             langButtons.forEach(button => {
@@ -682,24 +883,20 @@
                     button.classList.add('active');
                     const newLang = button.dataset.lang;
                     setLanguage(newLang);
-                    localStorage.setItem('lang', newLang); // Store preference
+                    localStorage.setItem('lang', newLang);
                 });
             });
 
-            // Función para mostrar la pestaña seleccionada
             function showTab(tabId) {
-                // Oculta todas las secciones de contenido de pestañas
                 document.querySelectorAll('.tab-content').forEach(section => {
-                    section.classList.remove('active-content'); // Remover la clase activa
+                    section.classList.remove('active-content');
                 });
 
-                // Muestra la sección de contenido de la pestaña seleccionada
                 const activeSection = document.getElementById(tabId);
                 if (activeSection) {
-                    activeSection.classList.add('active-content'); // Añadir la clase activa
+                    activeSection.classList.add('active-content');
                 }
 
-                // Actualiza el estado activo de los enlaces de navegación
                 document.querySelectorAll('.nav-tab-link').forEach(link => {
                     if (link.dataset.targetTab === tabId) {
                         link.classList.add('active-nav');
@@ -709,16 +906,27 @@
                 });
             }
 
-            // Configurar los enlaces de navegación para activar las pestañas
             document.querySelectorAll('.nav-tab-link').forEach(link => {
                 link.addEventListener('click', (event) => {
-                    event.preventDefault(); // Prevenir el comportamiento de anclaje por defecto
+                    event.preventDefault();
                     const targetTab = link.dataset.targetTab;
                     showTab(targetTab);
                 });
             });
 
-            // Mostrar la pestaña de inicio por defecto al cargar la página
+            // Lógica para el indicador de LIVE (simulado)
+            const liveIndicator = document.getElementById('live-status');
+            // Para una implementación real, esta variable se obtendría de una API de Twitch a través de un backend.
+            // Por ahora, puedes cambiarla manualmente a 'true' o 'false' para simular el estado.
+            const isLive = true; // Simular que está en vivo por defecto
+
+            if (isLive) {
+                liveIndicator.classList.add('is-live');
+            } else {
+                liveIndicator.classList.remove('is-live');
+            }
+
+
             showTab('inicio-section');
         });
     </script>
